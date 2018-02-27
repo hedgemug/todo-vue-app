@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My App</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <div id="vue-app">
+
+    <router-view></router-view>
+
+  </div>
+</body>
+</html>
+
+<template id="home-page">
+  <div class="vue-component">
+
+    <div>
+      <h1>Tasks</h1>
+      <h4>Total tasks: {{ tasks.length }}</h4>
+      <h4>Incomplete tasks left: {{ numIncompleteTasks() }}</h4>
+      <ul>
+        <li v-for="task in tasks" v-on:click="completeTask(task)" v-bind:class="{strike: task.completed}"> {{ task.text }} </li>
+      </ul>
+    </div>
+
+    <div>
+      <button v-on:click="clearCompletedTasks()">Clear completed tasks</button>
+    </div>
+
+    <div id="map"></div>
+
+  </div>
+</template>
