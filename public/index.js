@@ -37,10 +37,30 @@ var HomePage = {
   },
   computed: {},
   mounted: function() {
+    var myLatLng = {lat: 37.788, lng: -122.407}
     var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 37.788, lng: -122.407},
+      center: myLatLng,
       zoom: 11
     });
+
+    var places = [
+      {lat: 37.788, lng: -122.407, description: "Union Square"},
+      {lat: -25.363, lng: 131.044, description: "A place in Australia"},
+      {lat: -33.8675, lng: 151.207, description: "Chicago!"}
+    ]
+
+    places.forEach(function(place) {
+      var infowindow = new google.maps.InfoWindow({
+        content: place.description
+      });
+      var marker = new google.maps.Marker({
+        position: { lat: place.lat, lng: place.lng },
+        map: map
+      });
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+    })
   }
 };
 
